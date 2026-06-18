@@ -65,20 +65,47 @@ def decide (e : Event) (s : State) : Bool :=
 
 /-- **Soundness**: if `decide` returns `true`, then `validEvent` holds.
 
-    The `sorry` is a *tracked proof obligation*, not a skip.  The full proof
-    proceeds by case analysis on `e`, unfolding `decide` and each `valid*` def,
-    and applying `Bool.and_eq_true` / `Bool.or_eq_true` lemmas.
-
-    TODO (Policy Engineer, Week 3): replace `sorry` with the complete proof. -/
+    Proof: case analysis on `e`. For each constructor, unfold `decide` and
+    the matching `valid*` predicate; the other two predicates reduce to `False`
+    via their `| _ => False` arms, leaving a single conjunction to close
+    with `Bool.and_eq_true`, `Bool.or_eq_true`, and `Bool.not_eq_true`. -/
 theorem decide_sound (e : Event) (s : State)
     (h : decide e s = true) : validEvent e s := by
-  simp only [validEvent, validJitCompile, validCapTransfer, validAttestation, decide] at *
-  sorry
+  match e with
+  | Event.jitCompile souliir wasm _ _ =>
+    simp only [validEvent, validJitCompile, validCapTransfer, validAttestation, decide,
+               Bool.and_eq_true, Bool.not_eq_true, or_false, false_or] at *
+    exact h
+  | Event.capTransfer _ _ capHash policyCid =>
+    simp only [validEvent, validJitCompile, validCapTransfer, validAttestation, decide,
+               Bool.and_eq_true, Bool.or_eq_true, or_false, false_or] at *
+    exact h
+  | Event.attestation epoch rootCid _ =>
+    simp only [validEvent, validJitCompile, validCapTransfer, validAttestation, decide,
+               or_false, false_or] at *
+    exact eq_of_beq h
 
-/-- **Completeness** (aspirational, week 4+):
-    if `validEvent` holds, then `decide` returns `true`. -/
--- theorem decide_complete (e : Event) (s : State)
---     (h : validEvent e s) : decide e s = true := by
---   sorry
+/-- **Completeness**: if `validEvent` holds, then `decide` returns `true`.
+
+    The converse of `decide_sound` — together they establish that `decide`
+    is a correct decision procedure: it accepts exactly the valid events. -/
+theorem decide_complete (e : Event) (s : State)
+    (h : validEvent e s) : decide e s = true := by
+  match e with
+  | Event.jitCompile souliir wasm _ _ =>
+    simp only [validEvent, validJitCompile, validCapTransfer, validAttestation,
+               or_false, false_or] at h
+    simp only [decide, Bool.and_eq_true, Bool.not_eq_true]
+    exact h
+  | Event.capTransfer _ _ capHash policyCid =>
+    simp only [validEvent, validJitCompile, validCapTransfer, validAttestation,
+               or_false, false_or] at h
+    simp only [decide, Bool.and_eq_true, Bool.or_eq_true]
+    exact h
+  | Event.attestation epoch rootCid _ =>
+    simp only [validEvent, validJitCompile, validCapTransfer, validAttestation,
+               or_false, false_or] at h
+    simp only [decide]
+    exact beq_iff_eq.mpr h
 
 end Bifrost
