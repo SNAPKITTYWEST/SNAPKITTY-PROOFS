@@ -148,3 +148,5 @@ Forking this repository does not grant any right to use, modify, or distribute
 the contents. Written permission required for all use cases.
 
 Contact: jessicalw34@gmail.com
+
+![](https://sovereign-analytics.snapkittywest.workers.dev/canary/SNAPKITTY-PROOFS)
