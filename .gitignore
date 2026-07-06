@@ -1,3 +1,4 @@
+# Build artifacts
 *.log
 *.aux
 *.bbl
@@ -9,3 +10,53 @@
 *.toc
 *.tmp
 *.bak
+*.o
+*.hi
+*.dyn_o
+*.dyn_hi
+*.prof
+*.hp
+*.eventlog
+
+# Haskell
+dist-newstyle/
+.ghc.environment.*
+*.cabal~
+
+# Lean 4
+build/
+lake-packages/
+
+# Idris 2
+build/
+*.ibc
+
+# Prolog
+*.qlf
+*.qlf~
+
+# LaTeX
+*.pdf
+*.ps
+*.dvi
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Secrets (never commit)
+.env
+.env.*
+credentials*
+*.pem
+*.key
+*.p12
+*.pfx
