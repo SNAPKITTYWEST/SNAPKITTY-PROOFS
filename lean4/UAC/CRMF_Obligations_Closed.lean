@@ -1,3 +1,8 @@
+-- Copyright © 2026 SnapKitty Collective LLC. All rights reserved.
+-- Licensed under Business Source License 2.0 (BSL-2.0).
+-- Change Date: December 31, 2027 — after which, licensed under AGPL-3.0-only.
+-- See LICENSE for complete terms.
+
 -- UAC CRMF Obligations — All 8 sorrys closed
 -- Source: PhaseMirror/Foundry/crates/atomic-calculator/lean/CRMF_Obligations.lean
 -- Prior art: SnapKitty proofs/coq/SovereignJudge.v (2026-07-01)
