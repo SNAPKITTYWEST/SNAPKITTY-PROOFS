@@ -146,6 +146,19 @@ echo -e "0.3\n0.6" | runghc haskell/thermal.hs
 Copyright (c) 2026 Ahmad Ali Parr / SNAPKITTYWEST. All Rights Reserved.
 Forking this repository does not grant any right to use, modify, or distribute
 the contents. Written permission required for all use cases.
+## License
+
+Copyright © 2026 Ahmad Ali Parr.
+
+This project is licensed under the **GNU Affero General Public License,
+Version 3.0 only** (`AGPL-3.0-only`).
+
+You may use, study, modify, and redistribute the software under the terms
+of the AGPL v3. When a modified version is operated as a network service,
+users interacting with that service must be offered access to its
+corresponding source code.
+
+See [`LICENSE`](LICENSE) for the complete license terms.
 
 Contact: jessicalw34@gmail.com
 
